@@ -1,5 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="end">
+
+      <ion-button>
+        <ion-icon name="cog" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="cog" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
     <ion-title>
       Blank
     </ion-title>
@@ -7,10 +17,46 @@
 </ion-header>
 
 <ion-content>
-  <h1>Hello</h1>
-  <div>
-    ionic c'est super
-  </div>
+  <h1>Hello {{ name }}</h1>
+
+
+  <ion-button color="{{ preferedColor }}" class="rounded-botton" (click)="showHideList()"> 
+    {{ islistHidden ? 'afficher la liste' : 'Masquer la liste'}}
+    </ion-button>
+ 
+
+  <ion-button [color]="preferedColor" expand="block" routerLink="/form">
+    formulaire
+    <ion-icon name="alarm" slot="end"></ion-icon>
+    
+  </ion-button>
+
+  <ion-button color="danger">
+    <ion-icon name="alarm" slot="icon only"></ion-icon>
+
+  </ion-button>
+  <ion-list [hidden]="isListHidden">
+    <ion-list-header>Pays</ion-list-header>
+
+    <ion-item *ngFor="let country of countryList">
+
+      <ion-avatar slot="start">
+      <!--va informer sur l'affichage d'un element (ngif=boolen)-->
+        <ion-img src="/assets/{{ country.flag }}"
+      *ngIf="country.flag">
+    </ion-img>
+      </ion-avatar>
+
+      <ion-label>
+        {{country.name}}
+          <p>{{ country.mainCity }}</p>
+      </ion-label>
+      <ion-chip slot="start">5</ion-chip>
+
+    </ion-item>
+    
+    
+  </ion-list>
 </ion-content>
 
 <ion-footer>
